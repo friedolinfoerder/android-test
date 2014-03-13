@@ -31,6 +31,8 @@ Im Folgenden werden die Tools und Vorgehensweisen beschrieben, die im Entwicklun
 
 Um in einem Softwareprojekt, das von einem Team umgesetzt wird, von den eingesetzten Techniken zur Verbesserung der Qualität profitieren zu können, ist es sinnvoll, sich auf eine gemeinsame Entwicklungsumgebung zu einigen und ein Build-Tool einzusetzen. In dem studentischen Softwareprojekt kommt [Android Studio](http://developer.android.com/sdk/installing/studio.html) zum Einsatz, als Build-Tool wird [Gradle](http://www.gradle.org/) eingesetzt.
 
+Anders als Maven setzt Gradle nicht auf eine XML-basierte Konfiguration, sondern benutzt eine auf [Groovy](http://groovy.codehaus.org/) basierende Domain-Specific Language (DSL).
+
 ##Versionskontrolle mit Git
 
 Die Basis für eine automatisierte Testumgebung liefert ein Versionskontrollsystem. Bei diesem Testprojekt fiel die Wahl auf [Git](http://git-scm.com/), da es sich sehr gut mit den weiteren Softwarequalitätstools verbinden lässt.
