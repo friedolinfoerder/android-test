@@ -76,7 +76,7 @@ $ git init --bare testprojekt
 ```
 
 ####SSH-Zugriff konfigurieren
-Der Zugriff auf das neu erstellte Repository erfolgt mittels SSH. Dafür wird den git-User SSH konfiguriert:
+Der Zugriff auf das neu erstellte Repository erfolgt mittels SSH. Dafür wird für den git-User SSH konfiguriert:
 
 ``` sh
 $ ssh git@serverip
