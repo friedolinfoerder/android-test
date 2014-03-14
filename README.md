@@ -33,6 +33,21 @@ Um in einem Softwareprojekt, das von einem Team umgesetzt wird, von den eingeset
 
 Anders als Maven setzt Gradle nicht auf eine XML-basierte Konfiguration, sondern benutzt eine auf [Groovy](http://groovy.codehaus.org/) basierende Domain-Specific Language (DSL).
 
+Das Buildfile `build.gradle` befindet sich direkt im Projektverzeichnis. Daneben liegt ein Ordner `app`. In diesem befindet sich der Code des Projekts im `src`-Verzeichnis. In diesem widerum ist der Applikationscode im Verzeichnis `main`, die Komponententests im Verzeichnis `test` und die Integrationstests im Verzeichnis `robotium`.
+
+Die Ordnerstruktur des Projekts:
+
+```
+build.gradle
+app/
+  debug/
+  main/
+  src/
+    main/
+    test/
+    robotium/
+```
+
 ##Versionskontrolle mit Git
 
 Die Basis für eine automatisierte Testumgebung liefert ein Versionskontrollsystem. Bei diesem Testprojekt fiel die Wahl auf [Git](http://git-scm.com/), da es sich sehr gut mit den weiteren Softwarequalitätstools verbinden lässt.
