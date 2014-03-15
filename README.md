@@ -509,8 +509,13 @@ protected void setUp() throws Exception {
     solo = new Solo(getInstrumentation(), getActivity());
 }
 ```
+Die hier gezeigte `setUp`-Methode wird den folgenden Beispielen vorausgesetzt.
+
 
 ### Triviales Beispiel eines Integrationstests
+
+Im folgenden Test wird der Server zurückgesetzt, die App wird gestartet und es wird gewartet bis die `SearchActivity` sichtbar ist. Anschließend wird geprüft, ob die Übersichts-Liste leer ist.
+
 ``` java
 public void testNoItemsInListIfResetted() throws Exception {
     Log.d("robotium", "testNoItemsInListIfResetted");
