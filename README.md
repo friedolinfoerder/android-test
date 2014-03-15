@@ -246,7 +246,7 @@ $ ./gradlew test
     }
 ```
 
-In diesem Komponententest wird überprüft, ob die `chatHistoryView` tatsächlich erneuert wird, sobald dem `chatAdapter` eine neue Nachricht hinzugefügt wird. Hierzu werden zunächst die entsprechenden Methoden der beiden Komponenten aufgerufen. Anschließend werden die Kind-Elemente der `ListView` durchsucht. Assert-Bedingung ist, dass die neue Nachricht in der `ListView` vorkommt. 
+In diesem Komponententest wird überprüft, ob die `chatHistoryView` tatsächlich erneuert wird, sobald dem `chatAdapter` eine neue Nachricht hinzugefügt wird. Hierzu werden zunächst die entsprechenden Methoden der beiden Komponenten aufgerufen. Anschließend werden die Kind-Elemente der `ListView` durchsucht. Assert-Bedingung ist, dass die neue Nachricht in der `ListView` vorkommt. Dies wird 100 mal wiederholt, um zu garantieren, dass neue Nachrichten auch dann angezeigt werden, wenn die Liste im `chatAdapter` größer wird, als sie in der `chatHistoryView` angezeigt werden kann. Bevor die Kind-Elemente der `chatHistoryView` durchlaufen werden können, muss zunächst Robolectric verwendet werden, um die Views zu aktualisieren: `Robolectric.shadowOf(chatHistoryView).populateItems();`.
 
 ##Integrationstests
 
