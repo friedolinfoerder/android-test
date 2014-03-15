@@ -431,6 +431,24 @@ Im morepeople Projekt wird nach jedem Applikations-Start eine Anfrage an den Ser
 
 Um dies in den Robolectric-Tests zu ermöglichen, wird noch vor der `setUp` Methode folgende Initialisierungs-Abfolge durchgeführt:
 
+``` java
+@BeforeClass
+public static void setUpEnvironment() {
+    MainApplication.initJob = new Runnable() {
+        @Override
+        public void run() {
+            // Insert registration id and the user name into SharedPreferences
+            SharedPreferences sharedPreferences = Robolectric.application.getSharedPreferences("MorePeople", Context.MODE_PRIVATE);
+            sharedPreferences.edit().putString("appUsername", "Thorsten Test").commit();
+            sharedPreferences.edit().putString(MainRegistrar.PROPERTY_REG_ID, "test-gcm-id").commit();
+
+            // Add pending HTTP response which will be served as soon as the application
+            // sends the first HTTP request (no matter which request that will be).
+            Robolectric.addPendingHttpResponse(200, "{ 'STATE' : '"+MainApplication.UserState.OFFLINE.toString()+"' }");
+        }
+    };
+}
+```
 
 
 ##Integrationstests
