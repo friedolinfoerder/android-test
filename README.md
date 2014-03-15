@@ -385,8 +385,37 @@ Die Methode `gotFallbackLocation` ist für den Fall gedacht, dass das Smartphone
 
 Letztlich definiert der Code in `gotNewLocation` das erwartete Verhalten, welches im Fall einer veränderten Location ablaufen soll. Erneut wird das Ergebnis der Prüfung in die `assertionMap` eingetragen.
 
+Die folgende Zeile registriert den oben dargelegten `LocationResponseHandler`, und der `LocationWrapper` beginnt auf Veränderungen sowohl des `NETWORK_PROVIDER` als auch des `GPS_PROVIDER` zu lauschen:
 
+``` java
+locationWrapper.requestLocation(activity.getBaseContext(), locationResponseHandler, 60000);
+```
 
+Die folgende Zeile löst nun das Ereignis einer veränderten Location aus:
+
+``` java
+shadowLocationManager.simulateLocation(newLocation);
+```
+
+Da Robolectric Tests grundsätzlich single-threaded laufen, kann es eigentlich keine Race-Conditions geben. Dennoch liegen die asynchronen Tasks in einem Stack. Um zu garantieren, dass die anstehenden UI-Tasks durchgelaufen sind, bevor die assertionMap geprüft wird, sollte der folgende Befehl ausgeführt werden:
+
+``` java
+Robolectric.runUiThreadTasks();
+```
+
+Letztlich kann die assertionMap geprüft werden:
+
+``` java
+assertTrue(assertionMap.keySet().contains("gotInstantTemporaryLocation"));
+assertTrue(assertionMap.keySet().contains("gotNewLocation"));
+```        
+
+Robolectric erlaubt es, verzögerte Tasks, die z.B. via `postDelayed` gestartet wurden, sofort durchzuführen. Auf die Weise kann geprüft werden, ob die Methode `gotFallbackLocation` tatsächlich niemals aufgerufen wird - obwohl dies eigentlich erst in 60 Sekunden der Fall wäre:
+
+``` java
+Robolectric.runUiThreadTasksIncludingDelayedTasks();
+```
+Wäre der entsprechende asynchrone Task zu `gotFallbackLocation` noch immer angemeldet, dann würde jetzt aufgrund des oben genannten `fail()` Statements eine Exception ausgelöst werden.
 
 
 ``` java
