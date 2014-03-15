@@ -495,7 +495,8 @@ $ ./gradlew robotium
 ```
 
 ###setUp für Robotium
-Auch die Robotium tests basieren auf JUnit Testfällen. Dementsprechend wird in der setUp Methode der Zustand des Test-Servers zurückgesetzt und ein sogenanntes `Solo` Objekt erstellt. 
+Auch die Robotium tests basieren auf JUnit Testfällen. Dementsprechend wird in der setUp Methode der Zustand des Test-Servers zurückgesetzt und ein sogenanntes `Solo` Objekt erstellt. Die `Solo`-Klasse dient zum Ansteuern der Activities innerhalb von Robotium-Tests.
+
 ``` java
 @Override
 protected void setUp() throws Exception {
