@@ -323,14 +323,14 @@ Dieser Test hat das Ziel, die im Rahmen des Projekts entwickelte Komponente `Loc
 
 Zunächst wird ein Behelfs-Objekt instanziiert, welches dazu dient, asynchron entstehende Test-Ergebnisse einzusammeln:
 ``` java
-final Map<String, Boolean> checkMap = new HashMap<String, Boolean>();
+final Map<String, Boolean> assertionMap = new HashMap<String, Boolean>();
 ```
 Da zur Test-Laufzeit der Robolectric-Tests kein wirkliches Device zur Verfügung steht, müssen bestimmte Services gemockt werden, um die Funktionstüchtigkeit der Komponenten zu prüfen. Hierzu bietet Robolectric die Möglichkeit, Shadow-Objects zu erzeugen. In den folgenden Code-Zeilen wird eine Instanz eines `LocationManager` zusammen mit dem zugehörigen `ShadowLocationManager` erzeugt und konfiguriert:
 
 ``` java
-LocationManager instanceOfLocationManager = (LocationManager) Robolectric.application.getSystemService(Context.LOCATION_SERVICE);
-ShadowLocationManager slm = shadowOf(instanceOfLocationManager);
-slm.setProviderEnabled(LocationManager.NETWORK_PROVIDER, true);
+        LocationManager instanceOfLocationManager = (LocationManager) Robolectric.application.getSystemService(Context.LOCATION_SERVICE);
+        ShadowLocationManager shadowLocationManager = shadowOf(instanceOfLocationManager);
+        shadowLocationManager.setProviderEnabled(LocationManager.NETWORK_PROVIDER, true);
 ```
 
 Im nächsten Schritt werden `Location` Objekte erzeugt, 
