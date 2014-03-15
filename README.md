@@ -205,7 +205,7 @@ Robolectric wurde in das Gradle-Build-Script aufgenommen. Bei jedem Push auf den
 $ ./gradlew test
 ```
 
-### Beispiel-Tset zum Prüfen von Komponenten mit Views
+### Beispiel-Test zum Prüfen von Komponenten mit Views
 
 ``` java
     // if a user sends a chat message, it should appear in the textbox
