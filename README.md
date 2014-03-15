@@ -304,7 +304,23 @@ In diesem Komponententest wird überprüft, ob die `chatHistoryView` tatsächlic
     }
 ```
 
-Dieser Test hat das Ziel, die im Rahmen des Projekts entwickelte Komponente `LocationWrapper` zum Ansteuern der Geo-Location des Anwenders zu testen. Die asynchrone Natur dieser Komponente erfordert ein komplexeres Test-Verfahren. 
+Dieser Test hat das Ziel, die im Rahmen des Projekts entwickelte Komponente `LocationWrapper` zum Ansteuern der Geo-Location des Anwenders zu testen. Die asynchrone Natur dieser Komponente erfordert ein komplexeres Test-Verfahren, welches im folgenden dargelegt wird.
+
+Zunächst wird ein Behelfs-Objekt instanziiert, welches dazu dient, asynchron entstehende Test-Ergebnisse einzusammeln:
+``` java
+final Map<String, Boolean> checkMap = new HashMap<String, Boolean>();
+```
+Da zur Test-Laufzeit der Robolectric-Tests kein wirkliches Device zur Verfügung steht, müssen bestimmte Services gemockt werden, um die Funktionstüchtigkeit der Komponenten zu prüfen. Hierzu bietet Robolectric die Möglichkeit, Shadow-Objects zu erzeugen. In den folgenden Code-Zeilen wird eine Instanz eines `LocationManager` zusammen mit dem zugehörigen `ShadowLocationManager` erzeugt und konfiguriert:
+
+``` java
+LocationManager instanceOfLocationManager = (LocationManager) Robolectric.application.getSystemService(Context.LOCATION_SERVICE);
+ShadowLocationManager slm = shadowOf(instanceOfLocationManager);
+slm.setProviderEnabled(LocationManager.NETWORK_PROVIDER, true);
+```
+
+
+
+
 
 ##Integrationstests
 
