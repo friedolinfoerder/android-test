@@ -434,7 +434,7 @@ Um dies in den Robolectric-Tests zu ermöglichen, wird noch vor der `setUp` Meth
 ``` java
 @BeforeClass
 public static void setUpEnvironment() {
-    MainApplication.initJob = new Runnable() {
+    MainApplication.preInit = new Runnable() {
         @Override
         public void run() {
             // Insert registration id and the user name into SharedPreferences
@@ -449,6 +449,23 @@ public static void setUpEnvironment() {
     };
 }
 ```
+
+In der `MainApplication` Klasse wurde die `onCreate` Methode insofern erweitert, dass aus der Robolectric-Test-Umgebung heraus Anweisungen injiziert werden können, die zwar eine fertig instanziierte `Application` benötigen, also nach der `super.onCreate()`, aber noch vor den restlichen applikationsspezifischen Initialisierungs-Schritten ablaufen müssen:
+
+``` java
+@Override
+public void onCreate() {
+    super.onCreate();
+
+    if (preInit != null) {
+        preInit.run();
+    }
+
+    init();
+}
+```
+
+Innnerhalb der applikationsspezifischen Initialisierungsschritten (in `init()`) wird dann der HTTP-Request abgesetzt, welcher durch Robolectric sofort abgefangen wird. In diesem Fall wäre die Antwort ein JSON-String mit dem Inhalt `{ 'STATE' : 'OFFLINE' }'.
 
 
 ##Integrationstests
