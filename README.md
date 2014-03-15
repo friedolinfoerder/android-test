@@ -423,6 +423,16 @@ Wäre der entsprechende asynchrone Task zu `gotFallbackLocation` noch immer ange
 locationWrapper.requestLocation(activity.getBaseContext(), locationResponseHandler, 60000);
 ```
 
+### Beispiel-Test zum Prüfen von Komponenten mit HTTP-Requests
+
+Komplexere mobile Anwendungen beinhalten oftmals Komponenten, welche via Netzwerk auf einen oder mehrere Server zugreifen müssen. Robolectric erlaubt es, solche Komponenten zu testen, obwohl gar keine echte Verbindung zu einem entsprechenden Server besteht. Dies geschieht über einen Stack an vorbereiteten HTTP-Antworten, der vor dem jeweiligen Test angefertigt werden muss. 
+
+Im morepeople Projekt wird nach jedem Applikations-Start eine Anfrage an den Server geschickt. In der Antwort befindet sich die Information darüber, welchen Zustand der Client gerade hat. Anhand des Zustands kann der Client dann die entsprechende `Activity` auswählen und starten.
+
+Um dies in den Robolectric-Tests zu ermöglichen, wird noch vor der `setUp` Methode folgende Initialisierungs-Abfolge durchgeführt:
+
+
+
 ##Integrationstests
 
 Für die Integrationstest kam [Robotium](https://code.google.com/p/robotium/) zum Einsatz. Mit Robotium ist es möglich, Black-Box Tests über mehrere Activities hinweg zum erstellen, die über das User Interface Funktionalitäten prüfen. Dies steht dem manuellen Testen von Anwendungen in nichts nach; zusätzlich besteht der große Vorteil, dass die angelegten Tests automatisiert durchlaufen und jederzeit wiederholt werden können. Somit kann die korrekte Funktionsweise der App aus Nutzersicht überprüft werden.
