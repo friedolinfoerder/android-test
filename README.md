@@ -205,7 +205,7 @@ Robolectric wurde in das Gradle-Build-Script aufgenommen. Bei jedem Push auf den
 $ ./gradlew test
 ```
 
-### Triviales Beispiel eines Komponententests mit Robolectric
+### Beispiel-Tset zum Prüfen von Komponenten mit Views
 
 ``` java
     // if a user sends a chat message, it should appear in the textbox
@@ -247,6 +247,63 @@ $ ./gradlew test
 ```
 
 In diesem Komponententest wird überprüft, ob die `chatHistoryView` tatsächlich erneuert wird, sobald dem `chatAdapter` eine neue Nachricht hinzugefügt wird. Hierzu werden zunächst die entsprechenden Methoden der beiden Komponenten aufgerufen. Anschließend werden die Kind-Elemente der `ListView` durchsucht. Assert-Bedingung ist, dass die neue Nachricht in der `ListView` vorkommt. Dies wird 100 mal wiederholt, um zu garantieren, dass neue Nachrichten auch dann angezeigt werden, wenn die Liste im `chatAdapter` größer wird, als sie in der `chatHistoryView` angezeigt werden kann. Bevor die Kind-Elemente der `chatHistoryView` durchlaufen werden können, muss zunächst Robolectric verwendet werden, um die Views zu aktualisieren: `Robolectric.shadowOf(chatHistoryView).populateItems();`.
+
+### Beispiel-Test zum Prüfen von Komponenten mit Location-Services
+``` java
+    @Test
+    public void shouldProvideNewLocation() throws InterruptedException {
+        final Map<String, Boolean> checkMap = new HashMap<String, Boolean>();
+
+        Context context = activity.getBaseContext();
+
+        LocationManager instanceOfLocationManager = (LocationManager) Robolectric.application.getSystemService(Context.LOCATION_SERVICE);
+        ShadowLocationManager slm = shadowOf(instanceOfLocationManager);
+        slm.setProviderEnabled(LocationManager.NETWORK_PROVIDER, true);
+
+        final Location fakeLocation = new Location(LocationManager.NETWORK_PROVIDER);
+        fakeLocation.setLongitude(123);
+        fakeLocation.setLatitude(456);
+        fakeLocation.setTime(0);
+        slm.setLastKnownLocation(LocationManager.NETWORK_PROVIDER, fakeLocation);
+
+
+        final Location changedLocation = new Location(LocationManager.NETWORK_PROVIDER);
+        changedLocation.setLongitude(666);
+        changedLocation.setLatitude(333);
+        changedLocation.setTime(1000000);
+
+        LocationResponseHandler locationResponseHandler = new LocationResponseHandler(){
+            @Override
+            public void gotInstantTemporaryLocation(Location location) {
+                assertNotNull(location);
+                assertEquals(fakeLocation, location);
+                checkMap.put("gotInstantTemporaryLocation", true);
+            }
+
+            @Override
+            public void gotFallbackLocation(Location location) {
+                // should not get here!
+                checkMap.put("gotFallbackLocation", true);
+            }
+
+            @Override
+            public void gotNewLocation(Location location) {
+                assertNotNull(location);
+                assertEquals(changedLocation, location);
+                checkMap.put("gotNewLocation", true);
+            }
+        };
+
+        locationWrapper.requestLocation(activity.getBaseContext(),locationResponseHandler, 60000);
+
+        slm.simulateLocation(changedLocation);
+
+        assertFalse(checkMap.keySet().contains("gotFallbackLocation"));
+        assertTrue(checkMap.keySet().contains("gotInstantTemporaryLocation"));
+        assertTrue(checkMap.keySet().contains("gotNewLocation"));
+    }
+```
+
 
 ##Integrationstests
 
