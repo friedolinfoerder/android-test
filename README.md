@@ -493,7 +493,65 @@ Robotium wurde in die Testumgebung integriert. Anders als bei den Komponententes
 ``` sh
 $ ./gradlew robotium
 ```
-    
+
+### Triviales Beispiel eines Integrationstests
+``` java
+public void testNoItemsInListIfResetted() throws Exception {
+    Log.d("robotium", "testNoItemsInListIfResetted");
+
+    Log.d("robotium", "wait, until the search activity shows up");
+    solo.waitForActivity(SearchActivity.class);
+
+    Log.d("robotium", "get the listview");
+    ListView listView = solo.getCurrentViews(ListView.class).get(0);
+
+    Log.d("robotium", "test that the list view is empty");
+    assertEquals(0, listView.getChildCount());
+}
+
+```
+
+### Komplexes Beispiel eines Integrationstests
+``` java
+    public void testSearchAndClickAndCancel() throws Exception {
+        Log.d("robotium", "testSearchAndClickAndCancel");
+
+        Log.d("robotium", "add test user");
+        addTestUser("bier");
+
+        Log.d("robotium", "wait, until the search activity shows up");
+        solo.waitForActivity(SearchActivity.class);
+
+        Log.d("robotium", "get the listview");
+        final ListView listView = solo.getCurrentViews(ListView.class).get(0);
+
+        Log.d("robotium", "wait for listview to populate, with a timeout of 60 seconds");
+        solo.waitForCondition(new Condition() {
+            @Override
+            public boolean isSatisfied() {
+                return listView.getChildCount() > 0;
+            }
+        }, 60000);
+
+        Log.d("robotium", "assert that exactly 1 entry is in listview");
+        assertEquals(1, listView.getChildCount());
+
+        Log.d("robotium", "click first item in the list");
+        solo.clickInList(0);
+
+        Log.d("robotium", "wait for the confirmation dialog to appear");
+        solo.waitForDialogToOpen();
+
+        Log.d("robotium", "click on the cancel button");
+        solo.clickOnButton("Nein");
+
+        Log.d("robotium", "wait for the dialog to close");
+        solo.waitForDialogToClose();
+    }
+
+```
+
+
 Diskussion
 ==========
 
