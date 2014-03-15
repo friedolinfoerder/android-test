@@ -465,7 +465,7 @@ public void onCreate() {
 }
 ```
 
-Innnerhalb der applikationsspezifischen Initialisierungsschritten (in `init()`) wird dann der HTTP-Request abgesetzt, welcher durch Robolectric sofort abgefangen wird. In diesem Fall wäre die Antwort ein JSON-String mit dem Inhalt `{ 'STATE' : 'OFFLINE' }'.
+Innnerhalb der applikationsspezifischen Initialisierungsschritten (in `init()`) wird dann der HTTP-Request abgesetzt, welcher durch Robolectric sofort abgefangen wird. In diesem Fall wäre die Antwort ein JSON-String mit dem Inhalt `{ 'STATE' : 'OFFLINE' }`.
 
 
 ##Integrationstests
