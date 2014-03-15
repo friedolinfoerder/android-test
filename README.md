@@ -200,9 +200,53 @@ Beispielsweise lässt sich so testen, wie sich eine Klasse verhält, die sich be
 
 Robolectric wurde in das Gradle-Build-Script aufgenommen. Bei jedem Push auf den Server werden die Kompnententests ausgeführt und die Ergebnisse im Anschluss mit SonarQube visualisiert. Die Entwickler können die Tests auch manuell über die Konsole folgendermaßen ausführen:
 
+
 ``` sh
 $ ./gradlew test
 ```
+
+### Triviales Beispiel eines Komponententests mit Robolectric
+
+``` java
+    // if a user sends a chat message, it should appear in the textbox
+    @Test
+    public void shouldDisplayNewMessages() {
+        ListView chatHistoryView = (ListView) activity.findViewById(R.id.chat_history);
+        assertNotNull(chatHistoryView);
+
+        ChatAdapter chatAdapter = activity.getChatAdapterAdapter();
+
+        for (int m=0; m < 100; m++) {
+            // new message arrives
+            String testMessage = "message" + m;
+            chatAdapter.addNewMessage(testMessage);
+
+            // update robolectric
+            Robolectric.shadowOf(chatHistoryView).populateItems();
+
+            // child history view should have at least 1 child now
+            assertTrue(chatHistoryView.getChildCount() > 0);
+
+            boolean isDisplayed = false;
+            TextView messageView = null;
+            String displayedMessage = null;
+            // the ListView should now display the new message
+            for (int i=0; i < chatHistoryView.getChildCount(); i++) {
+                messageView = (TextView)chatHistoryView.getChildAt(i);
+                assertNotNull(messageView);
+                displayedMessage = messageView.getText().toString();
+                if (testMessage.equals(displayedMessage)) {
+                    isDisplayed = true;
+                }
+            }
+            assertNotNull(messageView);
+            assertNotNull(displayedMessage);
+            assertTrue(isDisplayed);
+        }
+    }
+```
+
+In diesem Komponententest wird überprüft, ob die `chatHistoryView` tatsächlich erneuert wird, sobald dem `chatAdapter` eine neue Nachricht hinzugefügt wird. Hierzu werden zunächst die entsprechenden Methoden der beiden Komponenten aufgerufen. Anschließend werden die Kind-Elemente der `ListView` durchsucht. Assert-Bedingung ist, dass die neue Nachricht in der `ListView` vorkommt. 
 
 ##Integrationstests
 
