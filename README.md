@@ -333,9 +333,19 @@ ShadowLocationManager shadowLocationManager = shadowOf(instanceOfLocationManager
 shadowLocationManager.setProviderEnabled(LocationManager.NETWORK_PROVIDER, true);
 ```
 
-Im nächsten Schritt werden `Location` Objekte erzeugt, 
+Im nächsten Schritt werden `Location` Objekte erzeugt. `currentLocation` stellt die bisherige Position des Smartphones da, `newLocation` beinhaltet Uhrzeit, Längen- und Breitengrade der veränderten/neuen Position. Hierbei ist zu beachten, dass Android nur dann Veränderungs-Ereignisse bezüglich der Location feuert, wenn die Zeitdifferenz und der räumliche Abstand zwischen den Locations groß genug ist. In Tests sollten daher ausreichend abweichende Location Objekte erzeugt werden.
 
+``` java
+final Location currentLocation = new Location(LocationManager.NETWORK_PROVIDER);
+currentLocation.setLongitude(123);
+currentLocation.setLatitude(456);
+currentLocation.setTime(0);
 
+final Location newLocation = new Location(LocationManager.NETWORK_PROVIDER);
+newLocation.setLongitude(666);
+newLocation.setLatitude(333);
+newLocation.setTime(1000000);
+```
 
 ##Integrationstests
 
