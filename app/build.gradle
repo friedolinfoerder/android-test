@@ -1,0 +1,143 @@
+/**************************************************************************************************
+ *    Buildscript Configuration
+ *************************************************************************************************/
+
+// Configuration of the build script itself
+buildscript {
+
+    // Repositories which contain the libraries necessary for the buildscript itself
+    repositories {
+        mavenCentral()
+        maven {
+            url 'https://oss.sonatype.org/content/repositories/snapshots/'
+        }
+    }
+
+    // Libraries which are needed for the build script itself
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.8.+'
+        classpath 'com.squareup.gradle:gradle-android-test-plugin:0.9.1-SNAPSHOT'
+    }
+}
+
+/**************************************************************************************************
+ *    Project Configuration
+ *************************************************************************************************/
+
+apply plugin: 'android'
+apply plugin: 'android-test'
+apply plugin: 'jacoco'
+apply plugin: 'sonar-runner'
+
+// Repositories which contain the libraries necessary for the project to build
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://oss.sonatype.org/content/repositories/snapshots/'
+    }
+}
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.0.1"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 19
+    }
+
+    dexOptions {
+        incremental false
+    }
+
+
+    // This makes Android Studio recognize the test folder as correct java module.
+    sourceSets {
+        instrumentTest {
+            java.srcDirs = ['src/test/java', 'src/robotium/java']
+        }
+        if (gradle.startParameter.taskNames.contains("test")) {
+            instrumentTest {
+                java.srcDirs = ['src/test/java']
+            }
+        }
+        if (gradle.startParameter.taskNames.contains("robotium")) {
+            instrumentTest {
+                java.srcDirs = ['src/robotium/java']
+            }
+        }
+    }
+}
+
+if (gradle.startParameter.taskNames.contains("robotium")) {
+    dependencies {
+        // Libraries which are necessary for compilation
+        compile 'com.android.support:appcompat-v7:+'
+        compile 'com.google.code.gson:gson:2.2.+'
+        compile 'com.google.android.gms:play-services:4.+'
+
+        // Libraries which are necessary for unit testing
+        testCompile 'com.jayway.android.robotium:robotium-solo:5.0.1'
+
+        // This is needed so Android Studio recognizes the imports in the test source folders
+        instrumentTestCompile 'com.jayway.android.robotium:robotium-solo:5.0.1'
+    }
+} else {
+    dependencies {
+        // Libraries which are necessary for compilation
+        compile 'com.android.support:appcompat-v7:+'
+        compile 'com.google.code.gson:gson:2.2.+'
+        compile 'com.google.android.gms:play-services:4.+'
+
+        // Libraries which are necessary for unit testing
+        testCompile 'junit:junit:4.10'
+        testCompile 'org.robolectric:robolectric:2.3-SNAPSHOT'
+        testCompile 'com.squareup:fest-android:1.0.+'
+        testCompile 'com.jayway.android.robotium:robotium-solo:5.0.1'
+        testCompile 'com.google.android.gms:play-services:4.+'
+
+        // This is needed so Android Studio recognizes the imports in the test source folders
+        instrumentTestCompile 'junit:junit:4.10'
+        instrumentTestCompile 'org.robolectric:robolectric:2.3-SNAPSHOT'
+        instrumentTestCompile 'com.squareup:fest-android:1.0.+'
+        instrumentTestCompile 'com.jayway.android.robotium:robotium-solo:5.0.1'
+        instrumentTestCompile 'com.google.android.gms:play-services:4.+'
+    }
+}
+
+task robotium {
+    dependsOn {
+        tasks.connectedInstrumentTest
+    }
+}
+
+// Static Code Analysis
+// Configuration of the sonarRunner task (the task itself is provided by the sonar-runner plugin)
+sonarRunner {
+    sonarProperties {
+        property "sonar.projectKey", "morepeopleandroid"
+        property "sonar.projectName", "morepeople android client"
+        property "sonar.projectVersion", "v0.01"
+        property "sonar.host.url", "$System.env.SONAR_URL"
+        property "sonar.jdbc.url", "$System.env.SONAR_JDBC_URL"
+        property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+        property "sonar.jdbc.username", "$System.env.SONAR_JDBC_USER"
+        property "sonar.jdbc.password", "$System.env.SONAR_JDBC_PASSWORD"
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.sources", "src/main/java"
+        property "sonar.binaries", "build/classes"
+        property "sonar.tests", "src/test/java"
+        property "sonar.dynamicAnalysis", "reuseReports"
+        property "sonar.junit.reportsPath", file("$buildDir/test-results")
+
+        // To provide information about code coverage, the results of the unit tests are needed
+        property "sonar.java.coveragePlugin", "jacoco"
+        property "sonar.jacoco.reportPath", "build/jacoco/testDebug.exec"
+    }
+}
+
+// remove dependencies, so sonarRunner starts even if tests fail
+tasks.sonarRunner.dependsOn = []
+// do not stop if a test fails
+test.ignoreFailures = true
+// run ./gradlew test sonarRunner --continue so test results are generated and sonarRunner is started
