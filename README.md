@@ -502,11 +502,11 @@ Das Einrichten dieses Systems war jedoch mit sehr vielen Schwierigkeiten verbund
 
 * Unabhängige Projekte für den Entwicklungs- und Testcode. Verwaltung der Projekte mit Maven.
 Statt Maven wurde Gradle eingesetzt. Dadurch lassen sich Entwicklungs- und Testcode in einem Projekt verwalten.
-* Eclipse als IDE. Umstellung auf Android Studio. Android Studio unterstützt von Haus aus das Entwickeln in Zusammenarbeit mit Gradle-Buildfiles.
+* [Eclipse](https://www.eclipse.org/) als IDE. Umstellung auf Android Studio. Android Studio unterstützt von Haus aus das Entwickeln in Zusammenarbeit mit Gradle-Buildfiles.
 * Testen auf dem Server mit virtuellem Device. Umstellung auf Robolectric.
 Durch Robolectric braucht man für das Ausführen der Tests keine Android-Geräte oder Emulatoren mehr. Dadurch hat die Laufzeit der Komponententests deutlich abgenommen.
 * Integrationstest mit JUnit. Umstellung auf Robotium.
-Robotium liefert die Möglichkeit, auf UI-Ebene zu testen.
+Robotium liefert die Möglichkeit, auf UI-Ebene zu testen und bietet dabei eine einfache API an.
 * Beziehen eines Git-Repositorys über GitHub. Umstellung auf eigenes Git-Repository durch Erstellen eines Git-Server. Sonarqube lässt sich so einfacher ansprechen.
 * Einsatz von Jenkins als CI-Server. Umstellung auf Travis CI, da dies eine Integration mit GitHub bietet. Zuletzt wurde auf CI-Server verzichtet, da dieser mit eigenem Git-Server nicht mehr notwendig war.
 
