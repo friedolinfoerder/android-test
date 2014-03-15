@@ -210,6 +210,10 @@ Robolectric wurde in das Gradle-Build-Script aufgenommen. Bei jedem Push auf den
 $ ./gradlew test
 ```
 
+Schon auf dem Entwickler-Rechner selbst wird dabei eine kurze Ergebnis-Übersicht generiert. Sie liegt im Verzeichnis der Form `build/test-report/debug/packages/<package-name>.html`. Die Ergebnisse können dann über einen beliebigen Web-Browser betrachtet werden:
+
+TODO: Link zu Bild
+
 ### Beispiel-Test zum Prüfen von Komponenten mit Views
 
 ``` java
