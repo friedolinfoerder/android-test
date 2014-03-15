@@ -304,6 +304,7 @@ In diesem Komponententest wird überprüft, ob die `chatHistoryView` tatsächlic
     }
 ```
 
+Dieser Test hat das Ziel, die im Rahmen des Projekts entwickelte Komponente `LocationWrapper` zum Ansteuern der Geo-Location des Anwenders zu testen. Die asynchrone Natur dieser Komponente erfordert ein komplexeres Test-Verfahren. 
 
 ##Integrationstests
 
