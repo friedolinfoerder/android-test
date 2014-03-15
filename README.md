@@ -212,7 +212,9 @@ $ ./gradlew test
 
 Schon auf dem Entwickler-Rechner selbst wird dabei eine kurze Ergebnis-Übersicht generiert. Sie liegt im Verzeichnis der Form `build/test-report/debug/packages/<package-name>.html`. Die Ergebnisse können dann über einen beliebigen Web-Browser betrachtet werden:
 
-TODO: Link zu Bild
+<p align="center">
+ <img alt="Gradle Results" src="http://friedolinfoerder.github.io/repos/android-test/images/gradle_results.png" />
+</p>
 
 ### Beispiel-Test zum Prüfen von Komponenten mit Views
 
