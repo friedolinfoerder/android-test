@@ -494,6 +494,21 @@ Robotium wurde in die Testumgebung integriert. Anders als bei den Komponententes
 $ ./gradlew robotium
 ```
 
+###setUp für Robotium
+Auch die Robotium tests basieren auf JUnit Testfällen. Dementsprechend wird in der setUp Methode der Zustand des Test-Servers zurückgesetzt und ein sogenanntes `Solo` Objekt erstellt. 
+``` java
+@Override
+protected void setUp() throws Exception {
+    super.setUp();
+
+    Log.d("robotium", "reset test server state.");
+    doGetRequest("/reset");
+
+    Log.d("robotium", "creating solo");
+    solo = new Solo(getInstrumentation(), getActivity());
+}
+```
+
 ### Triviales Beispiel eines Integrationstests
 ``` java
 public void testNoItemsInListIfResetted() throws Exception {
@@ -583,6 +598,7 @@ Quellen und Referenzen
 1. Android Developers http://developer.android.com/index.html
 2. Gradle http://www.gradle.org/
 3. Maven http://maven.apache.org/
+4. JUnit http://junit.org/
 4. Robolectric http://robolectric.org/index.html
 5. Robotium http://code.google.com/p/robotium/
 6. SonarQube http://www.sonarqube.org/
