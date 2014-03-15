@@ -479,10 +479,6 @@ Innnerhalb der applikationsspezifischen Initialisierungsschritten (in `init()`) 
 
 ##Integrationstests
 
-<div style="float: right">
- ![Robotium Logo](https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/t1/c58.36.453.453/s160x160/945981_381757008600466_479443272_n.jpg "Robotium Logo")
-</div>
-
 Für die Integrationstest kam [Robotium](https://code.google.com/p/robotium/) zum Einsatz. Mit Robotium ist es möglich, Black-Box Tests über mehrere Activities hinweg zum erstellen, die über das User Interface Funktionalitäten prüfen. Dies steht dem manuellen Testen von Anwendungen in nichts nach; zusätzlich besteht der große Vorteil, dass die angelegten Tests automatisiert durchlaufen und jederzeit wiederholt werden können. Somit kann die korrekte Funktionsweise der App aus Nutzersicht überprüft werden.
 Robotium bietet eine einfach zu erlernende Api zum Erstellen der Testfälle. Darüber wird es beispielsweise möglich, Textfelder auszufüllen, Buttons zu drücken oder auf das Öffnen von anderen Activities zu warten.
 
@@ -521,3 +517,11 @@ Beim Thema Testautomatisierung und Continuous Integration gibt es für fast alle
 
 Doch auch eine sehr gute automatisierte Testumgebung bringt in der Praxis nichts, wenn die Entwickler sich nicht mit der testgetriebenen Entwicklung anfreunden können und gar nicht oder nur selten Testfälle schreiben. In diesem Testprojekt waren die Entwickler TDD zwar positiv gegenüber eingestimmt, jedoch war es für alle das erste Projekt, bei dem man komplett testgetrieben entwickeln sollte. Aus diesem Grund war die Testabdeckung relativ gering – was zum Ende des Projekts auch dem zunehmendem Abgabestress geschuldet war. Doch alle Teilnehmer haben wertvolle Erfahrungen sammeln können und würden das nächste Mal wieder testgetrieben entwickeln wollen, denn auch “eine nicht vollständige Testabdeckung ist besser als gar keine Tests”, so das Resüme der Teilnehmer. Mit dieser Arbeit wurde ein System geschaffen, das als Basis und Anleitung für weitere testgetriebene Android-Projekte verwendet werden kann.
 
+Quellen und Referenzen
+======================
+
+1. Android Developers http://developer.android.com/index.html
+2. Gradle http://www.gradle.org/
+3. Robolectric http://robolectric.org/index.html
+4. Robotium http://code.google.com/p/robotium/
+5. SonarQube http://www.sonarqube.org/
