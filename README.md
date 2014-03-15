@@ -379,6 +379,20 @@ LocationResponseHandler locationResponseHandler = new LocationResponseHandler(){
 };
 ```
 
+Der `gotInstantTemporaryLocation` Callback sollte in jedem Fall durchgeführt werden - er liest hier nur die `lastKnownLocation` aus. Diese sollte natürlich identisch mit der zuvor gesetzten `currentLocation` sein. Um dies zu prüfen, wird der `assertionMap` ein entsprechender Eintrag hinzugefügt.
+
+Die Methode `gotFallbackLocation` ist für den Fall gedacht, dass das Smartphone nicht in der Lage ist, die Position innerhalb der vorgegebenen Zeitspanne zu bestimmen. In dem Fall wird einfach erneut die letztbekannte Location verwendet. Da dieser Test-Fall den Fall prüft, dass sich die Location tatsächlich ändert, darf dieser Zweig eigentlich nicht erreicht werden. Um einen Fehler zu provozieren, wird hier dauer `fail()` aufgerufen.
+
+Letztlich definiert der Code in `gotNewLocation` das erwartete Verhalten, welches im Fall einer veränderten Location ablaufen soll. Erneut wird das Ergebnis der Prüfung in die `assertionMap` eingetragen.
+
+
+
+
+
+``` java
+locationWrapper.requestLocation(activity.getBaseContext(), locationResponseHandler, 60000);
+```
+
 ##Integrationstests
 
 Für die Integrationstest kam [Robotium](https://code.google.com/p/robotium/) zum Einsatz. Mit Robotium ist es möglich, Black-Box Tests über mehrere Activities hinweg zum erstellen, die über das User Interface Funktionalitäten prüfen. Dies steht dem manuellen Testen von Anwendungen in nichts nach; zusätzlich besteht der große Vorteil, dass die angelegten Tests automatisiert durchlaufen und jederzeit wiederholt werden können. Somit kann die korrekte Funktionsweise der App aus Nutzersicht überprüft werden.
