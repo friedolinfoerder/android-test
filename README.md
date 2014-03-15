@@ -347,6 +347,38 @@ newLocation.setLatitude(333);
 newLocation.setTime(1000000);
 ```
 
+Als nächstes wird im `LocationManager` die zuletzt bekannte Position auf `currentLocation` gesetzt:
+
+``` java
+shadowLocationManager.setLastKnownLocation(LocationManager.NETWORK_PROVIDER, currentLocation);
+```
+
+Da die Anfrage der neuen Geo-Koordinaten asynchron abläuft, wird ein `LocationResponseHandler` benötigt. Dies hat den Nebeneffekt, dass auch diese im Rahmen des Projekts entstandene Komponente getestet wird. 
+
+``` java
+LocationResponseHandler locationResponseHandler = new LocationResponseHandler(){
+    @Override
+    public void gotInstantTemporaryLocation(Location location) {
+        assertNotNull(location);
+        assertEquals(currentLocation, location);
+        assertionMap.put("gotInstantTemporaryLocation", true);
+    }
+
+    @Override
+    public void gotFallbackLocation(Location location) {
+        // Should not get here!
+        fail();
+    }
+
+    @Override
+    public void gotNewLocation(Location location) {
+        assertNotNull(location);
+        assertEquals(newLocation, location);
+        assertionMap.put("gotNewLocation", true);
+    }
+};
+```
+
 ##Integrationstests
 
 Für die Integrationstest kam [Robotium](https://code.google.com/p/robotium/) zum Einsatz. Mit Robotium ist es möglich, Black-Box Tests über mehrere Activities hinweg zum erstellen, die über das User Interface Funktionalitäten prüfen. Dies steht dem manuellen Testen von Anwendungen in nichts nach; zusätzlich besteht der große Vorteil, dass die angelegten Tests automatisiert durchlaufen und jederzeit wiederholt werden können. Somit kann die korrekte Funktionsweise der App aus Nutzersicht überprüft werden.
