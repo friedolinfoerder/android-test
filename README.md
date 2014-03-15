@@ -317,7 +317,7 @@ Dieser Test hat das Ziel, die im Rahmen des Projekts entwickelte Komponente `Loc
         assertTrue(assertionMap.keySet().contains("gotInstantTemporaryLocation"));
         assertTrue(assertionMap.keySet().contains("gotNewLocation"));
 
-        // Cancel the delayed fallback task if it still is existent
+        // Immediately run the delayed fallback task if it still is existent
         Robolectric.runUiThreadTasksIncludingDelayedTasks();
     }
 ```
