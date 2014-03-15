@@ -479,6 +479,10 @@ Innnerhalb der applikationsspezifischen Initialisierungsschritten (in `init()`) 
 
 ##Integrationstests
 
+<div style="float: left">
+ <img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/t1/c58.36.453.453/s160x160/945981_381757008600466_479443272_n.jpg" alt="Robotium Logo" title="Robotium Logo" />
+</div>
+
 Für die Integrationstest kam [Robotium](https://code.google.com/p/robotium/) zum Einsatz. Mit Robotium ist es möglich, Black-Box Tests über mehrere Activities hinweg zum erstellen, die über das User Interface Funktionalitäten prüfen. Dies steht dem manuellen Testen von Anwendungen in nichts nach; zusätzlich besteht der große Vorteil, dass die angelegten Tests automatisiert durchlaufen und jederzeit wiederholt werden können. Somit kann die korrekte Funktionsweise der App aus Nutzersicht überprüft werden.
 Robotium bietet eine einfach zu erlernende Api zum Erstellen der Testfälle. Darüber wird es beispielsweise möglich, Textfelder auszufüllen, Buttons zu drücken oder auf das Öffnen von anderen Activities zu warten.
 
