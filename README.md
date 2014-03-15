@@ -582,7 +582,7 @@ Quellen und Referenzen
 
 1. Android Developers http://developer.android.com/index.html
 2. Gradle http://www.gradle.org/
-3. 9. Maven http://maven.apache.org/
+3. Maven http://maven.apache.org/
 4. Robolectric http://robolectric.org/index.html
 5. Robotium http://code.google.com/p/robotium/
 6. SonarQube http://www.sonarqube.org/
