@@ -249,6 +249,9 @@ $ ./gradlew test
 In diesem Komponententest wird überprüft, ob die `chatHistoryView` tatsächlich erneuert wird, sobald dem `chatAdapter` eine neue Nachricht hinzugefügt wird. Hierzu werden zunächst die entsprechenden Methoden der beiden Komponenten aufgerufen. Anschließend werden die Kind-Elemente der `ListView` durchsucht. Assert-Bedingung ist, dass die neue Nachricht in der `ListView` vorkommt. Dies wird 100 mal wiederholt, um zu garantieren, dass neue Nachrichten auch dann angezeigt werden, wenn die Liste im `chatAdapter` größer wird, als sie in der `chatHistoryView` angezeigt werden kann. Bevor die Kind-Elemente der `chatHistoryView` durchlaufen werden können, muss zunächst Robolectric verwendet werden, um die Views zu aktualisieren: `Robolectric.shadowOf(chatHistoryView).populateItems();`.
 
 ### Beispiel-Test zum Prüfen von Komponenten mit Location-Services
+
+Dieser Test hat das Ziel, die im Rahmen des Projekts entwickelte Komponente `LocationWrapper` zum Ansteuern der Geo-Location zu testen. Die asynchrone Natur dieser Komponente erfordert ein komplexeres Test-Verfahren, welches nach dem kompletten Code-Auszug detailliert dargelegt wird. 
+
 ``` java
     @Test
     public void shouldProvideNewLocation() throws InterruptedException {
@@ -318,8 +321,6 @@ In diesem Komponententest wird überprüft, ob die `chatHistoryView` tatsächlic
         Robolectric.runUiThreadTasksIncludingDelayedTasks();
     }
 ```
-
-Dieser Test hat das Ziel, die im Rahmen des Projekts entwickelte Komponente `LocationWrapper` zum Ansteuern der Geo-Location des Anwenders zu testen. Die asynchrone Natur dieser Komponente erfordert ein komplexeres Test-Verfahren, welches im folgenden dargelegt wird.
 
 Zunächst wird ein Behelfs-Objekt instanziiert, welches dazu dient, asynchron entstehende Test-Ergebnisse einzusammeln:
 ``` java
