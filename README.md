@@ -178,8 +178,9 @@ Für jeden Push wird das aktuelle Repository in einen separaten Ordner geklont. 
 * Testabdeckung
 
 Visualisierung der Testumgebung:
-
+<p align="center">
 ![Visualisierung der Testumgebung](http://friedolinfoerder.github.io/repos/android-test/images/QA_Workflow.png)
+</p>
 
 Praxis
 ======
