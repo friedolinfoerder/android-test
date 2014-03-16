@@ -242,7 +242,7 @@ Schon auf dem Entwickler-Rechner selbst wird dabei eine kurze Ergebnis-Übersich
 
 ### Beispiel-Test zum Prüfen von Komponenten mit Views
 
-Hier ein Beispiel aus der Klasse [`ChatActivityTest`](https://github.com/schreon/morepeople-android/blob/master/app/src/test/java/morepeople/android/app/ChatActivityTest.java):
+Hierzu ein Beispiel aus der Klasse [`ChatActivityTest`](https://github.com/schreon/morepeople-android/blob/master/app/src/test/java/morepeople/android/app/ChatActivityTest.java):
 
 ``` java
 // if a user sends a chat message, it should appear in the textbox
@@ -287,7 +287,7 @@ In diesem Komponententest wird überprüft, ob die `chatHistoryView` tatsächlic
 
 ### Beispiel-Test zum Prüfen von Komponenten mit Location-Services
 
-Dieser Test hat das Ziel, die im Rahmen des Projekts entwickelte Komponente `LocationWrapper` zum Ansteuern der Geo-Location zu testen. Die asynchrone Natur dieser Komponente erfordert ein komplexeres Test-Verfahren, welches nach dem kompletten Code-Auszug detailliert dargelegt wird. 
+Dieser Test hat das Ziel, die im Rahmen des Projekts entwickelte Komponente `LocationWrapper` zum Ansteuern der Geo-Location zu testen. Die asynchrone Natur dieser Komponente erfordert ein komplexeres Test-Verfahren, welches nach dem kompletten Code-Auszug aus der Klasse [`LocationWrapperTest`](https://github.com/schreon/morepeople-android/blob/master/app/src/test/java/morepeople/android/app/LocationWrapperTest.java) detailliert dargelegt wird. 
 
 ``` java
 @Test
@@ -532,7 +532,7 @@ protected void setUp() throws Exception {
 }
 ```
 Die hier gezeigte `setUp`-Methode wird den folgenden Beispielen vorausgesetzt.
-
+Die Folgenden Beispiele sowie die `setUp`-Methode befinden sich in der [`SearchEnvironmentTest`](https://github.com/schreon/morepeople-android/blob/master/app/src/robotium/java/morepeople/android/app/SearchEnvironmentTest.java)-Klasse
 
 ### Triviales Beispiel eines Integrationstests
 
