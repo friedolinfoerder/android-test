@@ -201,6 +201,15 @@ rm -rf $tmpdir
 Für jeden Push wird das aktuelle Repository in einen separaten Ordner geklont. Anschließend werden die Tasks `clean`, `test` und `sonarRunner` vom Gradle-Buildscript ausgeführt. Dies bewirkt, dass Berichte über Tests und Testabdeckung erstellt werden und anschließend SonarQube die Ergebnisse einliest, vorhandene Codefiles analysiert und daraufhin die Ergebnisse in die Datenbank schreibt. Das Resultat lässt sich über das Dashboard von SonarQube betrachten und enthält:
 
 * Statische Codeanalysen
+  * Zeilen an Code
+  * Anzahl an Klassen
+  * Dokumentation der Public-API
+  * Anteil an Kommentaren
+  * Anteil an Duplikationen
+  * Komplexität des Codes
+  * Schwachstellen
+  * Erfolg der Tests
+  * Testabdeckung
 * Ergebnisse der Tests
 * Testabdeckung
 
