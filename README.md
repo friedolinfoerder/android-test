@@ -225,10 +225,15 @@ Im Folgenden wird erklärt, wie Komponenten- und Integrationstests im Test-Proje
     
 ##Komponententests
 
-Jeder Entwickler möchte nach dem Pushen auf den Server möglichst schnell (nicht mehrere Minuten) sehen, ob alle vorhandenen Tests (noch) durchlaufen. Dauert das Durchlaufen der Tests zu lange, besteht die Gefahr, dass das Testsystem als Hürde angesehen wird und auf das Schreiben von Tests verzichtet wird.
-Um den Entwicklern ein schnelles Feedback zu geben wurde in der Testautomatisierung darauf verzichtet, ein virtuelles Gerät zu starten, da dies zu lange dauern würde. Stattdessen wurde die Library [Robolectric](http://robolectric.org/) benutzt. Damit wird es möglich, Android-Code in der Java Virtual Machine (JVM) auszuführen und so innerhalb kurzer Zeit das Ergebnis zu erhalten. Möglich wird dies, da Robolectric alle Android-spezifischen Codefragmente, die auf nativem C-Code zugreifen, der nur auf Android-Geräten (oder im Emulator) läuft, durch anderen Code ersetzt. Dafür müssen beim Testen nun nicht mehr die Standard-Anroid-Klassen verwendet werden, sondern die Klassen und Methoden von Robolectric.
- 
-Um sich beispielsweise eine eigens erstellte Activity zu holen, um diese zu testen, muss folgende Zeile geschrieben werden:
+Bevor ein Entwickler Änderungen am Source Code an den git-Server pusht, sollten eigentlich sämtliche Tests durchlaufen werden, um zu garantieren, dass der Haupt-Entwicklungszweig lauffähig bleibt. Dauert das Durchlaufen der Tests zu lange, besteht allerdings die Gefahr, dass das Testsystem als Hürde angesehen wird.
+
+Auch für die test-getriebene Software-Entwicklung auf den lokalen Entwickler-Systemen ist es wichtig, dass die Tests in akzeptabler Zeit ablaufen, um nicht den Arbeitsfluss der Mitarbeiter zu stören.
+
+Klassischerweise laufen die Tests in Android-Projekten auf einem physisch vorhandenen Endgerät oder einem Emulator statt. Der modifizierte Source Code wird kompiliert und auf das Gerät geladen, was allein schon mehrere Minuten Zeit in Anspruch nehmen kann.
+
+Um dies zu vermeiden, wurde die Library [Robolectric](http://robolectric.org/) eingeführt. Damit wird es möglich, Android-Code in der Java Virtual Machine (JVM) auszuführen und so innerhalb kurzer Zeit die Test-Ergebnisse zu erhalten, ohne dass zuvor ein Gerät oder ein Emulator gestartet werden muss. Auch das automatisierte Testen auf einem Server wird hierdurch möglich. Zudem können dadurch Werkzeuge, die ursprünglich nur für Java-Anwendungen entwickelt wurden, auch auf Android-Projekte angewandt werden.
+
+Realisiert wird dies, indem alle Android-spezifischen Zugriffe abgefangen und an Robolectric weitergeleitet werden. Um sich beispielsweise ein Activity-Objekt zu instanziieren und dieses zu testen, muss folgende Zeile ausgeführt werden:
 
 ``` java
 Activity activity = Robolectric.buildActivity(WelcomeActivity.class).create().get();
