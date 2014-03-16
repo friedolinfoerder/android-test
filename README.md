@@ -49,7 +49,7 @@ Dieses Dokument ist eine Anleitung zur Einrichtung einer Continuous Integration 
 
 Oftmals werden einführende Beispiele für test-getriebene Entwicklung der Komplexität realer Anwendungen nicht gerecht. Daher behandeöt diese Anleitung auch nicht-triviale Test-Fälle, die beispielsweise asynchrone Abläufe, eine Datenbank und Services von Drittanbietern mit einbeziehen. Die Beispiele beziehen sich auf ein studentisches Referenz-Projekt, welches parallel an der Hochschule der Medien entstanden ist. Dabei handelt s sich um [morepeople](https://github.com/schreon/morepeople-android), einem location-based Service in Form einer Android App. Mit morepeople können spontane Aktivitäten gestartet werden, für die automatisch interessierte Teilnehmer aus der Umgebung gesucht werden. Die Applikation erstreckt sich über einen Client- (Java/Android-Code) und einen Server-Teil (Python-Code). Anhand dieses Projekts, das ebenfalls auf Github zur Verfügung steht, sollen die eingesetzten Techniken erläutert werden. Dies hat den Vorteil, dass die Einrichtung und Verwendung einer automatisierten Testumgebung anhand eines realen Projekts Schritt für Schritt nachvollziehbar ist. 
 
-Dieses Repository stellt den Kern des studentischen Projekts dar und kann als Ausgangsbasis für zukünftige Projekte eingesetzt werden. Es enthält die gesamte Testumgebung inklusive Testschablonen für Komponenten- und Integrationstests.
+Ergänzend zu dem Referenz-Projekt "morepeople" enthält dieses Repository eine Vorlage für eine vollständige Testumgebung inklusive Test-Schablonen für Komponenten- und Integrationstests. Die Projekt-Struktur ist auf Android Studio ausgelegt.
 
 Methodik
 ========
@@ -62,7 +62,7 @@ Um in einem Softwareprojekt, das von einem Team umgesetzt wird, von den eingeset
 
 Anders als [Maven](http://maven.apache.org/) setzt Gradle nicht auf eine XML-basierte Konfiguration, sondern benutzt eine auf [Groovy](http://groovy.codehaus.org/) basierende Domain-Specific Language (DSL).
 
-Das Buildfile `build.gradle` befindet sich direkt im Projektverzeichnis. Daneben liegt ein Ordner `app`. In diesem befindet sich der Code des Projekts im `src`-Verzeichnis. In diesem wiederum ist der Applikationscode im Verzeichnis `main`, die Komponententests im Verzeichnis `test` und die Integrationstests im Verzeichnis `robotium`.
+Das Buildfile `build.gradle` befindet sich direkt im Projektverzeichnis. Daneben liegt ein Ordner `app`. In diesem befindet sich der Code des Projekts im `src`-Verzeichnis. In diesem widerum ist der Applikationscode im Verzeichnis `main`, die Komponententests im Verzeichnis `test` und die Integrationstests im Verzeichnis `robotium`.
 
 Die (vereinfachte) Ordnerstruktur des Projekts:
 
@@ -177,7 +177,7 @@ $ git clone git@serverip:testprojekt
 
 ##Architektur der Testumgebung
 
-Die Architektur der Testumgebung für das Test-Projekt hat sich im Laufe der Zeit ständig geändert. Dies liegt daran, dass ständig neue Tools ausprobiert wurden, die wiederum Einfluss auf andere Komponenten hatten. Die finale Fassung ist relativ schlank und dadurch sehr übersichtlich. Dies wurde unter anderem dadurch erreicht, dass ein eigener Git Server eingerichtet wurde. Auch auf einen CI-Server wie [Jenkins](http://jenkins-ci.org/) oder [Travis](https://travis-ci.org/) wurde verzichtet, da alle wichtigen Analysen in der finalen Variante auch mit Gradle in Verbindung mit [SonarQube](http://www.sonarqube.org/) durchgeführt werden konnten.
+Die Architektur der Testumgebung für das Test-Projekt hat sich im Laufe der Zeit ständig geändert. Dies liegt daran, dass ständig neue Tools ausprobiert wurden, die widerum Einfluss auf andere Komponenten hatten. Die finale Fassung ist relativ schlank und dadurch sehr übersichtlich. Dies wurde unter anderem dadurch erreicht, dass ein eigener Git Server eingerichtet wurde. Auch auf einen CI-Server wie [Jenkins](http://jenkins-ci.org/) oder [Travis](https://travis-ci.org/) wurde verzichtet, da alle wichtigen Analysen in der finalen Variante auch mit Gradle in Verbindung mit [SonarQube](http://www.sonarqube.org/) durchgeführt werden konnten.
 
 Auf dem Git Server wurde ein Repository angelegt. Anschließend wurde ein **Post-Receive Hook** erstellt. Mit Hilfe dieses Hooks werden die Komponententests gestartet und anschließend SonarQube benachrichtigt, dass eine neue Applikationsversion vorhanden ist.
 Der Hook muss in der Datei `post-receive` im Verzeichnis `hooks` des Repositorys angelegt werden. Im Test-Projekt ist in dieser Datei diese Zeilen vorhanden:
