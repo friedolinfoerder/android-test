@@ -208,8 +208,6 @@ Für jeden Push wird das aktuelle Repository in einen separaten Ordner geklont. 
   * Anteil an Duplikationen
   * Komplexität des Codes
   * Schwachstellen
-  * Erfolg der Tests
-  * Testabdeckung
 * Ergebnisse der Tests
 * Testabdeckung
 
