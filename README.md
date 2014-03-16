@@ -533,6 +533,9 @@ public void testNoItemsInListIfResetted() throws Exception {
 ```
 
 ### Komplexes Beispiel eines Integrationstests
+
+In diesem Beispiel wird getestet, ob sich beim Klicken auf ein existierendes Listenelement ein Dialog öffnet. Anschließend wird geprüft, ob sich dieser Dialog über den Abbrechen-Button schließen lässt.
+
 ``` java
     public void testSearchAndClickAndCancel() throws Exception {
         Log.d("robotium", "testSearchAndClickAndCancel");
@@ -571,6 +574,9 @@ public void testNoItemsInListIfResetted() throws Exception {
     }
 
 ```
+
+Mit `solo.getCurrentViews(ListView.class).get(0);` wird zunächst die Liste geholt und im Anschluss unter Einsatz der Methode `waitForCondition` solange gewartet, bis mindestens ein Element in der Liste ist. Danach wird geprüft, ob wirklich genau ein Listeneintrag vorhanden und daraufhin mit `solo.clickInList(0)` auf dieses Element geklickt.
+Nun soll sich ein Dialog öffnen, der mit einem Klick auf den Button mit dem Text `Nein` wieder geschlossen werden soll. Die Methoden `waitForDialogToOpen`, `clickOnButton("Nein")` und `waitForDialogToClose` prüfen diesen Ablauf.
 
 
 Diskussion
