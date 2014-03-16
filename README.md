@@ -54,7 +54,7 @@ Ergänzend zu dem Referenz-Projekt "morepeople" enthält dieses Repository eine 
 Einrichtung der technischen Infrastruktur
 =====================================
 
-Im Folgenden wird umfassend beschrieben, wie die konkrete technische Infrastruktur für eine Continuous Integration Umgebung eingerichtet werden kann.
+Im Folgenden wird umfassend beschrieben, wie die konkrete technische Infrastruktur für eine Continuous Integration Umgebung eingerichtet werden kann. Das Setup umfasst Android Studio als IDE, 
 
 ##Einrichtung von Android Studio
 
