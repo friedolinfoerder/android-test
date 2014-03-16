@@ -642,6 +642,7 @@ Quellen und Referenzen
 ======================
 
 1. Android Developers http://developer.android.com/index.html
+2. Android Studio http://developer.android.com/sdk/installing/studio.html
 2. Gradle http://www.gradle.org/
 3. Maven http://maven.apache.org/
 4. JUnit http://junit.org/
