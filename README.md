@@ -47,7 +47,7 @@ Ziel dieses Testprojekts war es, die gängigen Verfahren zur Verbesserung der So
 
 Bei dem studentischen Projekt [MorePeople](https://github.com/schreon/morepeople-android) handelt es sich um eine Android App, die Personen mit den gleichen Interessen zusammenbringen soll. Für die Umsetzung ist ein Client- (Java/Android-Code) und ein Server-Teil (Python-Code) notwendig. Anhand dieses Projekts, das ebenfalls auf Github zur Verfügung steht, sollen die eingesetzten Techniken erläutert werden. Dies hat den Vorteil, dass Interessierte Schritt für Schritt die Einrichtung und Verwendung einer automatisierten Testumgebung anhand eines überschaubaren und getesteten Projekts nachvollziehen können. 
 
-Dieses Repository stellt den Kern des studentischen Projekts dar und kann als Ausgangspunkt für zukünftige Projekte eingesetzt werden. Es enthält die gesamte Testumgebung inklusive Testschablonen für Komponenten- und Integrationstests.
+Dieses Repository stellt den Kern des studentischen Projekts dar und kann als Ausgangsbasis für zukünftige Projekte eingesetzt werden. Es enthält die gesamte Testumgebung inklusive Testschablonen für Komponenten- und Integrationstests.
 
 Methodik
 ========
