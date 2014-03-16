@@ -146,7 +146,7 @@ Dies lässt sich vom Entwicklerrechner aus folgendermaßen bewerkstelligen:
 $ scp id_dsa.pub git@serverip:/.ssh/entwickler_name.pub
 ```
 
-Falls der key in einem anderen Format als OpenSSH ist, muss er konvertiert werden:
+Falls der Key in einem anderen Format als OpenSSH ist, muss er konvertiert werden:
 
 ``` sh
 $ ssh-keygen -i -f entwickler_name.pub  > entwickler_name.com.pub
@@ -158,7 +158,7 @@ Anschließend muss der Key eingetragen werden:
 $ cat entwickler_name.com.pub >> .ssh/authorized_keys
 ```
     
-Im Anschluss muss nun der Entwickler, der das Projekt anlegt, einen intialen Commit erstellen und den Server festlegen. Dies lässt sich mit folgenden Kommandos durchführen:
+Im Anschluss muss nun der Entwickler, der das Projekt anlegt, einen initialen Commit erstellen und den Server festlegen. Dies lässt sich mit folgenden Kommandos durchführen:
 
 ``` sh
 $ git add .gitignore
