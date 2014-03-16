@@ -10,6 +10,7 @@ Autoren:
 
 Betreuende Professorin:  
 [Prof. Dr. Barbara Dörsam](http://www.hdm-stuttgart.de/~doersam/)
+
 Link zum Beispielprojekt: https://github.com/schreon/morepeople-android
 
 #Inhalt
