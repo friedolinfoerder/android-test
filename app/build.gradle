@@ -108,6 +108,7 @@ if (gradle.startParameter.taskNames.contains("robotium")) {
     }
 }
 
+// With the task robotium you can start the integration tests
 task robotium {
     dependsOn {
         tasks.connectedInstrumentTest
