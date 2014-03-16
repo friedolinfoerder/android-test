@@ -239,12 +239,11 @@ Realisiert wird dies, indem alle Android-spezifischen Zugriffe abgefangen und an
 Activity activity = Robolectric.buildActivity(WelcomeActivity.class).create().get();
 ```
 
-Robolectic eignet sich für Komponententests perfekt. Da man bei Komponententests die Funktionalitäten der geschriebenen Klassen in Isolation testen soll, gibt es keinen Grund, warum man dafür das Android-Framework und Geräte-Funktionalitäten nutzen müsste: Alle Geräte-Funktionen lassen sich über sogenannte *Shadow Objects* simulieren. Diese sind vergleichbar mit Mocks oder Stubs, wie man sie auch vom Testen her kennt, jedoch bieten die *Shadow Objects* noch zusätzliche Methoden an, über die man das zu testende Objekt untersuchen kann. Beispielsweise werden oftmals Getter angeboten, über die man Werte des Objekts abfragen kann.
+Robolectric ist dem originalen Android-Framework im Kontext von Komponententests nicht nur was die Rechenzeit angeht überlegen. Mit Robolectric kann der vollständige Gerätezustand manipuliert bzw. simuliert werden. So kann über einen Robolectric-Tests beispielsweise definiert werden, wie sich die Applikation verhalten soll, wenn während eines Vorgangs die Internet-Verbindung abbricht. 
 
-Mit Hilfe der *Shadow Objects* können Testfälle definiert werden, die das Verhalten der App bei bestimmten äußeren Einflüssen überprüfen. Dafür kann man das Verhalten von Hardware-Komponenten fest vorgeben bzw. innerhalb eines Testfalls vorspielen.
-Beispielsweise lässt sich so testen, wie sich eine Klasse verhält, die sich bei einem Chat um das Versenden und Empfangen von Nachrichten kümmert, wenn die Internetverbindung ausfällt.
+Alle Geräte-Funktionen lassen sich über sogenannte *Shadow Objects* simulieren. Diese sind vergleichbar mit Mocks oder Stubs, wie man sie auch vom Testen her kennt, jedoch bieten die *Shadow Objects* noch zusätzliche Methoden an, über die man das zu testende Objekt untersuchen oder verändern kann.
 
-Robolectric wurde in das Gradle-Build-Script aufgenommen. Bei jedem Push auf den Server werden die Kompnententests ausgeführt und die Ergebnisse im Anschluss mit SonarQube visualisiert. Die Entwickler können die Tests auch manuell über die Konsole folgendermaßen ausführen:
+Robolectric wurde in das Gradle-Build-Script als Abhängigkeit aufgenommen. Bei jedem Push auf den Server werden die Komponententests ausgeführt und die Ergebnisse im Anschluss via SonarQube visualisiert. Die Entwickler können die Tests auch lokal auf ihrem System über die Konsole ausführen:
 
 
 ``` sh
