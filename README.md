@@ -447,13 +447,13 @@ Die folgende Zeile löst nun das Ereignis einer veränderten Location aus:
 shadowLocationManager.simulateLocation(newLocation);
 ```
 
-Da Robolectric Tests grundsätzlich single-threaded laufen, kann es eigentlich keine Race-Conditions geben. Dennoch liegen die asynchronen Tasks in einem Stack. Um zu garantieren, dass die anstehenden UI-Tasks durchgelaufen sind, bevor die assertionMap geprüft wird, sollte der folgende Befehl ausgeführt werden:
+Da Robolectric Tests grundsätzlich single-threaded laufen, kann es eigentlich keine Race-Conditions geben. Dennoch liegen die asynchronen Tasks in einem Stack. Um zu garantieren, dass die anstehenden UI-Tasks durchgelaufen sind, bevor die `assertionMap` geprüft wird, sollte der folgende Befehl ausgeführt werden:
 
 ``` java
 Robolectric.runUiThreadTasks();
 ```
 
-Letztlich kann die assertionMap geprüft werden:
+Letztlich kann die `assertionMap` geprüft werden:
 
 ``` java
 assertTrue(assertionMap.keySet().contains("gotInstantTemporaryLocation"));
