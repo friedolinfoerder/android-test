@@ -637,7 +637,9 @@ Aufgrund dieser vielen Anpassung ergab sich ein enormer Aufwand. Doch gerade dur
 Fazit
 =====
 
-Beim Thema Testautomatisierung und Continuous Integration gibt es für fast alle Programmiersprachen eine Vielzahl an verschiedenen Tools, Libraries und Lösungen, mit denen man für Softwareprojekte ein System erstellen kann, mit dem man die Softwarequalität objektiv messen kann und das die Entwickler dazu motiviert, “besseren” und getesten Code zu schreiben. Doch gerade in der Vielzahl der Tools liegt die größte Schwierigkeit: Es gibt nicht die beste Testumgebung. In dieser Arbeit wurde ein System für die testgetriebene Java/Android-Entwicklung vorgestellt, das statische Codeanalysen automatisiert durchführt und alle notwendigen Features für eine testgetriebene Entwicklung mitbringt (Testausführung, Messung der Testabdeckung, Möglichkeit von Integrationstest). Zwar gab es auf dem Weg zum zufriedenstellenden System einige Stolpersteine, jedoch hat sich der Aufwand gelohnt, da nun ein Gesamtsystem entstanden ist, das sich für weitere Android-Projekte einsetzen lässt.
+Beim Thema Testautomatisierung und Continuous Integration gibt es für fast alle Programmiersprachen eine Vielzahl an Tools, Libraries und Lösungen, mit denen man für Softwareprojekte ein System erstellen kann, mit dem man die Softwarequalität objektiv messen kann. Ein weiterer wesentlicher Faktor ist die Motivation, Code mit einer möglichst hohen Test-Abdeckung zu schreiben. Doch gerade in der Vielzahl der Tools liegt die größte Schwierigkeit: Es gibt nicht die beste Testumgebung. In dieser Arbeit wurde ein System für die testgetriebene Java/Android-Entwicklung vorgestellt, das statische Codeanalysen automatisiert durchführt und alle notwendigen Features für eine testgetriebene Entwicklung mitbringt (Testausführung, Messung der Testabdeckung, Möglichkeit von Integrationstest). Zwar gab es auf dem Weg zum zufriedenstellenden System einige Stolpersteine, jedoch hat sich der Aufwand gelohnt, da nun ein Gesamtsystem entstanden ist, das sich für weitere Android-Projekte einsetzen lässt.
+
+
 
 Quellen und Referenzen
 ======================
