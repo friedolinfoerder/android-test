@@ -8,6 +8,8 @@ Autoren:
 * Friedolin Förder ff026@hdm-stuttgart.de
 * Leon Schröder ls066@hdm-stuttgart.de
 
+Betreuende Professorin:  
+[Prof. Dr. Barbara Dörsam](http://www.hdm-stuttgart.de/~doersam/)
 Link zum Beispielprojekt: https://github.com/schreon/morepeople-android
 
 #Inhalt
