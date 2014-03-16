@@ -240,42 +240,42 @@ Schon auf dem Entwickler-Rechner selbst wird dabei eine kurze Ergebnis-Übersich
 ### Beispiel-Test zum Prüfen von Komponenten mit Views
 
 ``` java
-    // if a user sends a chat message, it should appear in the textbox
-    @Test
-    public void shouldDisplayNewMessages() {
-        ListView chatHistoryView = (ListView) activity.findViewById(R.id.chat_history);
-        assertNotNull(chatHistoryView);
+// if a user sends a chat message, it should appear in the textbox
+@Test
+public void shouldDisplayNewMessages() {
+    ListView chatHistoryView = (ListView) activity.findViewById(R.id.chat_history);
+    assertNotNull(chatHistoryView);
 
-        ChatAdapter chatAdapter = activity.getChatAdapterAdapter();
+    ChatAdapter chatAdapter = activity.getChatAdapterAdapter();
 
-        for (int m=0; m < 100; m++) {
-            // new message arrives
-            String testMessage = "message" + m;
-            chatAdapter.addNewMessage(testMessage);
+    for (int m=0; m < 100; m++) {
+        // new message arrives
+        String testMessage = "message" + m;
+        chatAdapter.addNewMessage(testMessage);
 
-            // update robolectric
-            Robolectric.shadowOf(chatHistoryView).populateItems();
+        // update robolectric
+        Robolectric.shadowOf(chatHistoryView).populateItems();
 
-            // child history view should have at least 1 child now
-            assertTrue(chatHistoryView.getChildCount() > 0);
+        // child history view should have at least 1 child now
+        assertTrue(chatHistoryView.getChildCount() > 0);
 
-            boolean isDisplayed = false;
-            TextView messageView = null;
-            String displayedMessage = null;
-            // the ListView should now display the new message
-            for (int i=0; i < chatHistoryView.getChildCount(); i++) {
-                messageView = (TextView)chatHistoryView.getChildAt(i);
-                assertNotNull(messageView);
-                displayedMessage = messageView.getText().toString();
-                if (testMessage.equals(displayedMessage)) {
-                    isDisplayed = true;
-                }
-            }
+        boolean isDisplayed = false;
+        TextView messageView = null;
+        String displayedMessage = null;
+        // the ListView should now display the new message
+        for (int i=0; i < chatHistoryView.getChildCount(); i++) {
+            messageView = (TextView)chatHistoryView.getChildAt(i);
             assertNotNull(messageView);
-            assertNotNull(displayedMessage);
-            assertTrue(isDisplayed);
+            displayedMessage = messageView.getText().toString();
+            if (testMessage.equals(displayedMessage)) {
+                isDisplayed = true;
+            }
         }
+        assertNotNull(messageView);
+        assertNotNull(displayedMessage);
+        assertTrue(isDisplayed);
     }
+}
 ```
 
 In diesem Komponententest wird überprüft, ob die `chatHistoryView` tatsächlich erneuert wird, sobald dem `chatAdapter` eine neue Nachricht hinzugefügt wird. Hierzu werden zunächst die entsprechenden Methoden der beiden Komponenten aufgerufen. Anschließend werden die Kind-Elemente der `ListView` durchsucht. Assert-Bedingung ist, dass die neue Nachricht in der `ListView` vorkommt. Dies wird 100 mal wiederholt, um zu garantieren, dass neue Nachrichten auch dann angezeigt werden, wenn die Liste im `chatAdapter` größer wird, als sie in der `chatHistoryView` angezeigt werden kann. Bevor die Kind-Elemente der `chatHistoryView` durchlaufen werden können, muss zunächst Robolectric verwendet werden, um die Views zu aktualisieren: `Robolectric.shadowOf(chatHistoryView).populateItems();`.
@@ -285,73 +285,73 @@ In diesem Komponententest wird überprüft, ob die `chatHistoryView` tatsächlic
 Dieser Test hat das Ziel, die im Rahmen des Projekts entwickelte Komponente `LocationWrapper` zum Ansteuern der Geo-Location zu testen. Die asynchrone Natur dieser Komponente erfordert ein komplexeres Test-Verfahren, welches nach dem kompletten Code-Auszug detailliert dargelegt wird. 
 
 ``` java
-    @Test
-    public void shouldProvideNewLocation() throws InterruptedException {
-        // The asynchronous nature of LocationWrapper requires an object where assertion results
-        // can be stored. This is necessary, because it could not be determined if an event
-        // that should be reached (and thus does not fail) has actually been reached.
-        final Map<String, Boolean> assertionMap = new HashMap<String, Boolean>();
+@Test
+public void shouldProvideNewLocation() throws InterruptedException {
+    // The asynchronous nature of LocationWrapper requires an object where assertion results
+    // can be stored. This is necessary, because it could not be determined if an event
+    // that should be reached (and thus does not fail) has actually been reached.
+    final Map<String, Boolean> assertionMap = new HashMap<String, Boolean>();
 
-        // During robolectric tests, no real device is available. Thus, system services like
-        // the NETWORK_PROVIDER and the according LocationManager must be mocked.
-        LocationManager instanceOfLocationManager = (LocationManager) Robolectric.application.getSystemService(Context.LOCATION_SERVICE);
-        ShadowLocationManager shadowLocationManager = shadowOf(instanceOfLocationManager);
-        shadowLocationManager.setProviderEnabled(LocationManager.NETWORK_PROVIDER, true);
+    // During robolectric tests, no real device is available. Thus, system services like
+    // the NETWORK_PROVIDER and the according LocationManager must be mocked.
+    LocationManager instanceOfLocationManager = (LocationManager) Robolectric.application.getSystemService(Context.LOCATION_SERVICE);
+    ShadowLocationManager shadowLocationManager = shadowOf(instanceOfLocationManager);
+    shadowLocationManager.setProviderEnabled(LocationManager.NETWORK_PROVIDER, true);
 
-        final Location currentLocation = new Location(LocationManager.NETWORK_PROVIDER);
-        currentLocation.setLongitude(123);
-        currentLocation.setLatitude(456);
-        // Attention: Android won't trigger a changed location event if the time span between
-        // the location objects is too small!!!
-        currentLocation.setTime(0);
+    final Location currentLocation = new Location(LocationManager.NETWORK_PROVIDER);
+    currentLocation.setLongitude(123);
+    currentLocation.setLatitude(456);
+    // Attention: Android won't trigger a changed location event if the time span between
+    // the location objects is too small!!!
+    currentLocation.setTime(0);
 
-        final Location newLocation = new Location(LocationManager.NETWORK_PROVIDER);
-        newLocation.setLongitude(666);
-        newLocation.setLatitude(333);
-        // Attention: Android won't trigger a changed location event if the time span between
-        // the location objects is too small!!!
-        newLocation.setTime(1000000);
+    final Location newLocation = new Location(LocationManager.NETWORK_PROVIDER);
+    newLocation.setLongitude(666);
+    newLocation.setLatitude(333);
+    // Attention: Android won't trigger a changed location event if the time span between
+    // the location objects is too small!!!
+    newLocation.setTime(1000000);
 
-        shadowLocationManager.setLastKnownLocation(LocationManager.NETWORK_PROVIDER, currentLocation);
+    shadowLocationManager.setLastKnownLocation(LocationManager.NETWORK_PROVIDER, currentLocation);
 
-        LocationResponseHandler locationResponseHandler = new LocationResponseHandler(){
-            @Override
-            public void gotInstantTemporaryLocation(Location location) {
-                assertNotNull(location);
-                assertEquals(currentLocation, location);
-                assertionMap.put("gotInstantTemporaryLocation", true);
-            }
+    LocationResponseHandler locationResponseHandler = new LocationResponseHandler(){
+        @Override
+        public void gotInstantTemporaryLocation(Location location) {
+            assertNotNull(location);
+            assertEquals(currentLocation, location);
+            assertionMap.put("gotInstantTemporaryLocation", true);
+        }
 
-            @Override
-            public void gotFallbackLocation(Location location) {
-                // Should not get here!
-                fail();
-            }
+        @Override
+        public void gotFallbackLocation(Location location) {
+            // Should not get here!
+            fail();
+        }
 
-            @Override
-            public void gotNewLocation(Location location) {
-                assertNotNull(location);
-                assertEquals(newLocation, location);
-                assertionMap.put("gotNewLocation", true);
-            }
-        };
+        @Override
+        public void gotNewLocation(Location location) {
+            assertNotNull(location);
+            assertEquals(newLocation, location);
+            assertionMap.put("gotNewLocation", true);
+        }
+    };
 
-        // This starts the asynchronous location request
-        locationWrapper.requestLocation(activity.getBaseContext(), locationResponseHandler, 60000);
+    // This starts the asynchronous location request
+    locationWrapper.requestLocation(activity.getBaseContext(), locationResponseHandler, 60000);
 
-        // This simulates a location changed event
-        shadowLocationManager.simulateLocation(newLocation);
+    // This simulates a location changed event
+    shadowLocationManager.simulateLocation(newLocation);
 
-        // Wait for all async tasks to finish
-        Robolectric.runUiThreadTasks();
+    // Wait for all async tasks to finish
+    Robolectric.runUiThreadTasks();
 
-        // Assert that the correct asynchronous event handlers have been called
-        assertTrue(assertionMap.keySet().contains("gotInstantTemporaryLocation"));
-        assertTrue(assertionMap.keySet().contains("gotNewLocation"));
+    // Assert that the correct asynchronous event handlers have been called
+    assertTrue(assertionMap.keySet().contains("gotInstantTemporaryLocation"));
+    assertTrue(assertionMap.keySet().contains("gotNewLocation"));
 
-        // Immediately run the delayed fallback task if it still is existent
-        Robolectric.runUiThreadTasksIncludingDelayedTasks();
-    }
+    // Immediately run the delayed fallback task if it still is existent
+    Robolectric.runUiThreadTasksIncludingDelayedTasks();
+}
 ```
 
 Zunächst wird ein Behelfs-Objekt instanziiert, welches dazu dient, asynchron entstehende Test-Ergebnisse einzusammeln:
@@ -554,41 +554,41 @@ public void testNoItemsInListIfResetted() throws Exception {
 In diesem Beispiel wird getestet, ob sich beim Klicken auf ein existierendes Listenelement ein Dialog öffnet. Anschließend wird geprüft, ob sich dieser Dialog über den Abbrechen-Button schließen lässt.
 
 ``` java
-    public void testSearchAndClickAndCancel() throws Exception {
-        Log.d("robotium", "testSearchAndClickAndCancel");
+public void testSearchAndClickAndCancel() throws Exception {
+    Log.d("robotium", "testSearchAndClickAndCancel");
 
-        Log.d("robotium", "add test user");
-        addTestUser("bier");
+    Log.d("robotium", "add test user");
+    addTestUser("bier");
 
-        Log.d("robotium", "wait, until the search activity shows up");
-        solo.waitForActivity(SearchActivity.class);
+    Log.d("robotium", "wait, until the search activity shows up");
+    solo.waitForActivity(SearchActivity.class);
 
-        Log.d("robotium", "get the listview");
-        final ListView listView = solo.getCurrentViews(ListView.class).get(0);
+    Log.d("robotium", "get the listview");
+    final ListView listView = solo.getCurrentViews(ListView.class).get(0);
 
-        Log.d("robotium", "wait for listview to populate, with a timeout of 60 seconds");
-        solo.waitForCondition(new Condition() {
-            @Override
-            public boolean isSatisfied() {
-                return listView.getChildCount() > 0;
-            }
-        }, 60000);
+    Log.d("robotium", "wait for listview to populate, with a timeout of 60 seconds");
+    solo.waitForCondition(new Condition() {
+        @Override
+        public boolean isSatisfied() {
+            return listView.getChildCount() > 0;
+        }
+    }, 60000);
 
-        Log.d("robotium", "assert that exactly 1 entry is in listview");
-        assertEquals(1, listView.getChildCount());
+    Log.d("robotium", "assert that exactly 1 entry is in listview");
+    assertEquals(1, listView.getChildCount());
 
-        Log.d("robotium", "click first item in the list");
-        solo.clickInList(0);
+    Log.d("robotium", "click first item in the list");
+    solo.clickInList(0);
 
-        Log.d("robotium", "wait for the confirmation dialog to appear");
-        solo.waitForDialogToOpen();
+    Log.d("robotium", "wait for the confirmation dialog to appear");
+    solo.waitForDialogToOpen();
 
-        Log.d("robotium", "click on the cancel button");
-        solo.clickOnButton("Nein");
+    Log.d("robotium", "click on the cancel button");
+    solo.clickOnButton("Nein");
 
-        Log.d("robotium", "wait for the dialog to close");
-        solo.waitForDialogToClose();
-    }
+    Log.d("robotium", "wait for the dialog to close");
+    solo.waitForDialogToClose();
+}
 
 ```
 
