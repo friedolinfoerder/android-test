@@ -55,11 +55,11 @@ Im Folgenden werden die Tools und Vorgehensweisen beschrieben, die im Entwicklun
 
 Um in einem Softwareprojekt, das von einem Team umgesetzt wird, von den eingesetzten Techniken zur Verbesserung der Qualität profitieren zu können, ist es sinnvoll, sich auf eine gemeinsame Entwicklungsumgebung zu einigen und ein Build-Tool einzusetzen. In dem studentischen Softwareprojekt kommt [Android Studio](http://developer.android.com/sdk/installing/studio.html) zum Einsatz, als Build-Tool wird [Gradle](http://www.gradle.org/) eingesetzt.
 
-Anders als Maven setzt Gradle nicht auf eine XML-basierte Konfiguration, sondern benutzt eine auf [Groovy](http://groovy.codehaus.org/) basierende Domain-Specific Language (DSL).
+Anders als [Maven](http://maven.apache.org/) setzt Gradle nicht auf eine XML-basierte Konfiguration, sondern benutzt eine auf [Groovy](http://groovy.codehaus.org/) basierende Domain-Specific Language (DSL).
 
 Das Buildfile `build.gradle` befindet sich direkt im Projektverzeichnis. Daneben liegt ein Ordner `app`. In diesem befindet sich der Code des Projekts im `src`-Verzeichnis. In diesem widerum ist der Applikationscode im Verzeichnis `main`, die Komponententests im Verzeichnis `test` und die Integrationstests im Verzeichnis `robotium`.
 
-Die Ordnerstruktur des Projekts:
+Die (vereinfachte) Ordnerstruktur des Projekts:
 
 ```
 build.gradle
