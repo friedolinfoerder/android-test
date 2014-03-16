@@ -8,6 +8,7 @@ import org.robolectric.res.Fs;
 
 /**
  * @author Leon Schröder
+ * @author Friedolin Förder
  * RobolectricGradleTestRunner
  */
 public class TestRunner extends RobolectricTestRunner {
