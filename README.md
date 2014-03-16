@@ -16,7 +16,7 @@ Link zum SonarQube-Dashboard des Projekts: http://109.230.231.200:9000/dashboard
 
 #Inhalt
 * [Einleitung](#einleitung)
-* [Methodik](#methodik)
+* [Einrichtung der technischen Infrastruktur](#einrichtung-der-technischen-infrastruktur)
   * [Einrichtung von Android Studio](#einrichtung-von-android-studio)
   * [Versionskontrolle mit Git](#versionskontrolle-mit-git)
     * [Methode 1: Nutzung von Github](#methode-1-nutzung-von-github)
