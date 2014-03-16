@@ -214,7 +214,7 @@ Um den Entwicklern ein schnelles Feedback zu geben wurde in der Testautomatisier
 Um sich beispielsweise eine eigens erstellte Activity zu holen, um diese zu testen, muss folgende Zeile geschrieben werden:
 
 ``` java
-Activity activity = Robolectric.buildActivity(GcmActivity.class).create().get();
+Activity activity = Robolectric.buildActivity(WelcomeActivity.class).create().get();
 ```
 
 Robolectic eignet sich für Komponententests perfekt. Da man bei Komponententests die Funktionalitäten der geschriebenen Klassen in Isolation testen soll, gibt es keinen Grund, warum man dafür das Android-Framework und Geräte-Funktionalitäten nutzen müsste: Alle Geräte-Funktionen lassen sich über sogenannte *Shadow Objects* simulieren. Diese sind vergleichbar mit Mocks oder Stubs, wie man sie auch vom Testen her kennt, jedoch bieten die *Shadow Objects* noch zusätzliche Methoden an, über die man das zu testende Objekt untersuchen kann. Beispielsweise werden oftmals Getter angeboten, über die man Werte des Objekts abfragen kann.
