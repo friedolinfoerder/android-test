@@ -49,7 +49,7 @@ Dieses Dokument ist eine Anleitung zur Einrichtung einer Continuous Integration 
 
 Oftmals werden einführende Beispiele für test-getriebene Entwicklung der Komplexität realer Anwendungen nicht gerecht. Daher behandeöt diese Anleitung auch nicht-triviale Test-Fälle, die beispielsweise asynchrone Abläufe, eine Datenbank und Services von Drittanbietern mit einbeziehen. Die Beispiele beziehen sich auf ein studentisches Referenz-Projekt, welches parallel an der Hochschule der Medien entstanden ist. Dabei handelt s sich um [morepeople](https://github.com/schreon/morepeople-android), einem location-based Service in Form einer Android App. Mit morepeople können spontane Aktivitäten gestartet werden, für die automatisch interessierte Teilnehmer aus der Umgebung gesucht werden. Die Applikation erstreckt sich über einen Client- (Java/Android-Code) und einen Server-Teil (Python-Code). Anhand dieses Projekts, das ebenfalls auf Github zur Verfügung steht, sollen die eingesetzten Techniken erläutert werden. Dies hat den Vorteil, dass die Einrichtung und Verwendung einer automatisierten Testumgebung anhand eines realen Projekts Schritt für Schritt nachvollziehbar ist. 
 
-Ergänzend zu dem Referenz-Projekt "morepeople" enthält dieses Repository eine Vorlage für eine vollständige Testumgebung inklusive Test-Schablonen für Komponenten- und Integrationstests. Die Projekt-Struktur ist auf Android Studio ausgelegt.
+Ergänzend zu dem Referenz-Projekt "morepeople" enthält dieses Repository eine Vorlage für eine vollständige Testumgebung inklusive Test-Schablonen für Komponenten- und Integrationstests. Die Projekt-Struktur ist auf Android Studio ausgelegt und kann als Basis für neue Projekte dienen.
 
 Methodik
 ========
