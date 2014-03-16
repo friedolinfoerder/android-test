@@ -9,9 +9,10 @@ import org.robolectric.annotation.Config;
 import static junit.framework.Assert.assertNotNull;
 
 /**
- * Created by schreon on 3/15/14.
+ * @author Leon Schröder
+ * @author Friedolin Förder
+ * WelcomeActivityTest
  */
-
 @SuppressWarnings("ConstantConditions")
 @Config(emulateSdk = 18)
 @RunWith(TestRunner.class)
@@ -20,9 +21,13 @@ public class WelcomeActivityTest {
 
     @Before
     public void setUp() {
+        // create the activity with the robolectric library
         welcomeActivity = Robolectric.buildActivity(WelcomeActivity.class).create().get();
     }
-
+    
+    /**
+     * Tests if the activity is available and not null
+     */
     @Test
     public void sampleTest() {
         assertNotNull(welcomeActivity);
