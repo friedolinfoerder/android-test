@@ -85,7 +85,7 @@ Grundsätzlich hat man für die Einrichtung einer automatisierten Testumgebung a
 Zunächst muss ein Repository bei Github erstellt werden und alle beteiligten Entwickler als Collaborators eingetragen werden. Anschließend können alle Entwickler das Repository auf ihrem Entwicklerrechner klonen:
 
 ``` sh
-$ git clone https://github.com/test/testprojekt.git
+$ git clone https://github.com/friedolinfoerder/android-test.git
 ```
 
 ###Methode 2: Einsatz eines eigenen Git Servers
