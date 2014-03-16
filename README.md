@@ -16,7 +16,7 @@ Link zum SonarQube-Dashboard des Projekts: http://109.230.231.200:9000/dashboard
 
 #Inhalt
 * [Einleitung](#einleitung)
-* [Einrichtung der technischen Infrastruktur](#einrichtung-der-technischen-infrastruktur)
+* [Methodik](#methodik)
   * [Einrichtung von Android Studio](#einrichtung-von-android-studio)
   * [Versionskontrolle mit Git](#versionskontrolle-mit-git)
     * [Methode 1: Nutzung von Github](#methode-1-nutzung-von-github)
@@ -636,9 +636,11 @@ Aufgrund dieser vielen Anpassung ergab sich ein enormer Aufwand. Doch gerade dur
 
 Fazit
 =====
+Test-Driven Development ist anfangs gewöhnungsbedürftig. Erst einen Test zu schreiben und dann die Implementierung anzufertigen zwingt den Entwickler, sich von vorneherein mit der Dokumentation der verwendeten Programmiersprache und der verwendeten Frameworks auseinander zu setzen. Dies erweckt zunächst den Eindruck, nicht voranzukommen oder unproduktiv zu sein. Jedoch zahlt sich der initiale Mehraufwand im späteren Projektablauf aus, denn ohne Tests entsteht unweigerlich die Situation, dass komplexe Fehler/Bugs auftreten und ein signifikanter Zeitaufwand für eine nicht immer zielführende Fehlersuche anfällt. TDD führt implizit dazu, dass man den Source Code leicht testbar hält - was im Umkehrschluss meistens bedeutet, dass er modularer wird und die Komponenten saubere Schnittstellen haben. 
 
-Beim Thema Testautomatisierung und Continuous Integration gibt es für fast alle Programmiersprachen eine Vielzahl an Tools, Libraries und Lösungen, mit denen man für Softwareprojekte ein System erstellen kann, mit dem man die Softwarequalität objektiv messen kann. Ein weiterer wesentlicher Faktor ist die Motivation, Code mit einer möglichst hohen Test-Abdeckung zu schreiben. Doch gerade in der Vielzahl der Tools liegt die größte Schwierigkeit: Es gibt nicht die beste Testumgebung. In dieser Arbeit wurde ein System für die testgetriebene Java/Android-Entwicklung vorgestellt, das statische Codeanalysen automatisiert durchführt und alle notwendigen Features für eine testgetriebene Entwicklung mitbringt (Testausführung, Messung der Testabdeckung, Möglichkeit von Integrationstest). Zwar gab es auf dem Weg zum zufriedenstellenden System einige Stolpersteine, jedoch hat sich der Aufwand gelohnt, da nun ein Gesamtsystem entstanden ist, das sich für weitere Android-Projekte einsetzen lässt.
+Ist diese anfängliche motivationsbedingte Hürde überwunden, kommt eine professionelle Continuous Integration Umgebung voll zum Tragen. Metriken wie Code Coverage, Dokumentations-Abdeckung, Code Complexity, etc wirken sehr motivierend, da sie den Projektfortschritt bezüglich der Code Qualität visualisieren. 
 
+Die größte Herausforderung im Rahmen dieses Projekts bestand allerdings in der Einrichtung der Infrastruktur. Hierzu dient nun diese Anleitung und die in diesem Repository verfügbare Projekt-Vorlage, sodass der Fokus in zukünftigen Android-Projekten gleich auf der eigentlichen Entwicklung und dem test-getriebenen Entwickeln liegen kann.
 
 
 Quellen und Referenzen
