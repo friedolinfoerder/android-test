@@ -1,8 +1,7 @@
 #Dokumentation zum Testdriven Development mit Android
 
 [Hochschule der Medien Stuttgart](http://www.hdm-stuttgart.de/)  
-[Studiengang Computer Science and Media](http://www.mi.hdm-stuttgart.de/csm)
-
+[Studiengang Computer Science and Media](http://www.mi.hdm-stuttgart.de/csm)  
 WS 2013/2014
 
 Autoren:
