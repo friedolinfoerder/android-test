@@ -5,7 +5,6 @@
 WS 2013/2014
 
 Autoren:
-
 * Friedolin Förder ff026@hdm-stuttgart.de
 * Leon Schröder ls066@hdm-stuttgart.de
 
