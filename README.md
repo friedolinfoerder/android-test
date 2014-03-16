@@ -11,7 +11,8 @@ Autoren:
 Betreuende Professorin:  
 [Prof. Dr. Barbara Dörsam](http://www.hdm-stuttgart.de/~doersam/)
 
-Link zum Beispielprojekt: https://github.com/schreon/morepeople-android
+Link zum Beispielprojekt: https://github.com/schreon/morepeople-android  
+Link zum SonarQube-Dashboard des Projekts: http://109.230.231.200:9000/dashboard/index/morepeopleandroid
 
 #Inhalt
 * [Einleitung](#einleitung)
