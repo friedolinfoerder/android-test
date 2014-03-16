@@ -14,13 +14,18 @@ public class TestRunner extends RobolectricTestRunner {
 
     /**
      * Constructor
-     * @param testClass
+     * @param testClass The class which should be tested
      * @throws InitializationError
      */
     public TestRunner(Class<?> testClass) throws InitializationError {
         super(testClass);
     }
-
+    
+    /**
+     * Get the AndroidManifest of the application
+     * @param  Config The configuration for the application
+     * @return        The AndroidManifest of the application
+     */
     @Override
     protected AndroidManifest getAppManifest(Config config) {
         String manifestProperty = System.getProperty("android.manifest");
